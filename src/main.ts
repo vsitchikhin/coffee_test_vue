@@ -5,14 +5,14 @@ import App from './App.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 import { createPinia } from 'pinia';
-import axios from 'axios';
-import VueAxios from 'vue-axios';
 
 import 'vuetify/styles';
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
-import { routes } from './router/routes.ts';
+import { routes } from 'router/routes';
+import VueAxios from 'vue-axios';
+import axios from 'axios';
 
 const router = createRouter({
   history: createWebHistory(),

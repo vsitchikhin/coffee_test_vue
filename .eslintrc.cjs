@@ -135,6 +135,7 @@ module.exports = {
         'indent': 'off',
         '@typescript-eslint/indent': ['error', 2],
         '@typescript-eslint/explicit-function-return-type': ['off'],
+        "@typescript-eslint/no-redundant-type-constituents": "off",
         'object-curly-spacing': 'off',
         '@typescript-eslint/object-curly-spacing': ['error', 'always'],
         // '@typescript-eslint/explicit-function-return-type': 'off',
