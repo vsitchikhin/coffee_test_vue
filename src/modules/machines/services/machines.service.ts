@@ -1,7 +1,8 @@
-import { Service } from 'modules/service';
+import { Service } from '../../service';
 import { machinesStore } from './machines.store';
-import { CoffeeMachineDto, IResponse, ParameterDto, ParameterTypesEnum } from 'modules/machines/types/machines.types';
+import { CoffeeMachineDto, IResponse, ParameterDto, ParameterTypesEnum } from '../types/machines.types';
 import axios from 'axios';
+import { useNewConfig } from '../utils/useEmptyDataObjects';
 
 
 export class MachinesService extends Service {
@@ -50,11 +51,7 @@ export class MachinesService extends Service {
       const { data } = await axios.get<IResponse<ParameterDto[]>>(`${this.apiPath}/parameters`);
 
       if (data.payload) {
-        const sizes = data.payload.filter(p => p.code === ParameterTypesEnum.size);
-        const qtys = data.payload.filter(p => p.code === ParameterTypesEnum.qty);
-
-        this.store.SET_DRINK_QTY_LIST_PAYLOAD(qtys);
-        this.store.SET_SIZE_LIST_PAYLOAD(sizes);
+        this.updateConfigValues(data.payload);
       }
     } catch(e) {
       console.log(e);
@@ -83,5 +80,28 @@ export class MachinesService extends Service {
     } catch(e) {
       console.log(e);
     }
+  }
+
+  // ------------------------------------------------------------------
+  // Методы обновления стора
+  private updateConfigValues(payload: ParameterDto[]) {
+    const sizes = payload.filter(p => p.code === ParameterTypesEnum.size);
+    const qtys = payload.filter(p => p.code === ParameterTypesEnum.qty);
+
+    this.store.SET_DRINK_QTY_LIST_PAYLOAD(qtys);
+    this.store.SET_SIZE_LIST_PAYLOAD(sizes);
+  }
+
+  public updateCurrentConfiguration(conf: Partial<CoffeeMachineDto>) {
+    if (!this.currentConfig) {
+      this.store.SET_CURRENT_CONFIG(useNewConfig(conf));
+      return;
+    }
+
+    const config: CoffeeMachineDto = {
+      ...this.currentConfig,
+      ...conf,
+    };
+    this.store.SET_CURRENT_CONFIG(config);
   }
 }

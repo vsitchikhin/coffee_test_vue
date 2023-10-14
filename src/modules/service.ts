@@ -1,6 +1,6 @@
 export class Service {
   protected apiHeaders: { [key: string]: string };
-  protected baseUrl: string = process.env.BASE_URL;
+  protected baseUrl = import.meta.env.VITE_BASE_URL;
 
   public constructor() {
     this.apiHeaders = {};

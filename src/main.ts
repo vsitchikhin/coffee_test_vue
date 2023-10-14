@@ -10,13 +10,13 @@ import 'vuetify/styles';
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
-import { routes } from 'router/routes';
+import { Routes } from './router/routes';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: Routes,
 });
 
 const vuetify = createVuetify({

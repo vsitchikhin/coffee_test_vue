@@ -1,13 +1,13 @@
 export interface ParameterDto {
-  id: number;
+  id: string | number;
   name: string
   value: string;
-  code: string;
+  code: ParameterTypesEnum;
   image?: string;
 }
 
 export interface CoffeeMachineDto {
-  id: number;
+  id: string | number;
   name: string;
   count: number;
   size: Required<ParameterDto>;
