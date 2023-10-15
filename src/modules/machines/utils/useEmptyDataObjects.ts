@@ -4,7 +4,7 @@ import { ID_FOR_NEW_ENTITY } from '../../../consts/base.consts';
 export function useEmptyParameter(type: ParameterTypesEnum): ParameterDto {
   return {
     id: ID_FOR_NEW_ENTITY,
-    name: '',
+    name: 'не указан',
     value: '',
     code: type,
     image: type === ParameterTypesEnum.size ? '' : undefined,
@@ -12,11 +12,11 @@ export function useEmptyParameter(type: ParameterTypesEnum): ParameterDto {
 }
 
 export function useNewConfig(conf?: Partial<CoffeeMachineDto>): CoffeeMachineDto {
-  let result = {
+  let result: CoffeeMachineDto = {
     id: ID_FOR_NEW_ENTITY,
-    name: '',
+    name: 'не указан',
     count: 0,
-    size: useEmptyParameter(ParameterTypesEnum.size),
+    size: <Required<ParameterDto>>useEmptyParameter(ParameterTypesEnum.size),
     qty: useEmptyParameter(ParameterTypesEnum.qty),
   };
 

@@ -58,7 +58,15 @@ export class MachinesService extends Service {
     }
   }
 
-  public async sendMachineToCort(payload: CoffeeMachineDto) {
+  public async sendMachineToCort() {
+    const payload = this.currentConfig;
+
+    if (!payload) {
+      return;
+    }
+
+    payload.count = 1;
+
     try {
       await axios.post<IResponse<boolean>>(`${this.apiPath}/`, payload);
     } catch(e) {
