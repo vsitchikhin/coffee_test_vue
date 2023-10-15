@@ -77,6 +77,7 @@ export class MachinesService extends Service {
   public async deleteMachineFromCort(payload: CoffeeMachineDto) {
     try {
       await axios.delete<IResponse<boolean>>(`${this.apiPath}/${payload.id}`);
+      await this.loadMachineList();
     } catch(e) {
       console.log(e);
     }
@@ -85,6 +86,7 @@ export class MachinesService extends Service {
   public async updateMachinesCount(payload: CoffeeMachineDto) {
     try {
       await axios.patch<IResponse<boolean>>(`${this.apiPath}/${payload.id}`, payload);
+      await this.loadMachineList();
     } catch(e) {
       console.log(e);
     }

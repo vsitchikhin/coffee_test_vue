@@ -10,9 +10,9 @@
         <div class="machine-card__option">Кол-во напитков: {{ currentMachine.qty.name }}</div>
       </div>
       <div class="machine-card__count-block">
-        <v-btn text="+" size="large" variant="outlined" class="machine-card__count-input" @click="incrementCount" />
-        <v-text-field v-model="currentMachine.count" density="compact" variant="outlined" label="Количество" class="machine-card__count-input" />
         <v-btn text="-" size="large" variant="outlined" class="machine-card__count-input" @click="decrementCount" />
+        <v-text-field v-model="currentMachine.count" density="compact" variant="outlined" label="Количество" class="machine-card__count-input" />
+        <v-btn text="+" size="large" variant="outlined" class="machine-card__count-input" @click="incrementCount" />
       </div>
     </div>
     <v-btn text="Удалить из хранилища" variant="outlined" color="red" class="machine-card__delete" @click="deleteMachine" />
