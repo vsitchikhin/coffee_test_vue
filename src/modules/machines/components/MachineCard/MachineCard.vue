@@ -37,6 +37,8 @@ export default defineComponent({
     const machineService = new MachinesService();
     const currentMachine = ref<CoffeeMachineDto>(deepCopyObject(props.machine));
 
+    // ----------------------------------------------------------------
+    // Обработка событий
     async function incrementCount() {
       currentMachine.value.count = currentMachine.value.count + 1;
       await machineService.updateMachinesCount(currentMachine.value);

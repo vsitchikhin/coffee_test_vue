@@ -1,18 +1,49 @@
-# Vue 3 + TypeScript + Vite
+# Тестовое задание Vue 3 Composition API
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Необходимо разработать конфигуратор кофемашины на Vue3 Composition API, состоящий из 2 страниц.
 
-## Recommended IDE Setup
+Первая страница предоставляет возможность выбрать опции:
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+1. Размер (Стандартный / Большой)
+2. Кол-во доступных напитков (6 / 8 / 12)
 
-## Type Support For `.vue` Imports in TS
+При выборе размера, автоматически меняется изображение \
+Выбранные опции отображаются в заголовке страницы
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+Так же на странице присутствует кнопка "добавить в хранилище", позволяющая сохранить выбранную конфигурацию
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+Вторая страница содержит список сохраненных конфигураций, разделенных на модели. \
+Каждая позиция имеет элемен увеличения / уменьшения количества и удаления из списка.
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+### Для запуска необходимо
+
+Выполнить ```npm i``` \
+Создать файл ```.env``` с указанием переменной ```VITE_BASE_URL``` \
+Пример: ```VITE_BASE_URL=http://localhost:port``` \
+Выполнить ```npm run dev```
+
+### Структура проекта
+
+Директории:
+
+**consts** \
+Данная директория содержит общие константы проекта
+
+**modules** \
+Данная директория содержит модули, связанные с бизнес-логикой, API-запросами и утилитами с ними связанные
+
+**router** \
+Данная директория содержит список маршрутов для vue-router
+
+**pages** \
+Данная директория содержит список компонентов страниц
+
+**public** \
+Данная директория содержит внутренние изображения
+
+**components** \
+Данная директория содержит UI компоненты
+
+**modules/machines** \
+Модуль работы с кофемашинами, внутри него находятся компоненты, связанные с данными, сервисы и pinia storage'ы,
+выполняющие обработку, хранение и получение данных, типы данных и утилиты связанные с данным модулем

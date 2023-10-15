@@ -2,7 +2,7 @@
   <div class="page">
     <h1 class="page__header">{{ pageLabel }}</h1>
     <div class="page__content-container">
-      <img :src="selectedSize.image" :alt="pageLabel" class="page__img">
+      <img :src="imageSrc" :alt="pageLabel" class="page__img">
       <div class="page__options-wrapper">
         <v-select
           v-model="selectedSize"
@@ -57,15 +57,20 @@ export default defineComponent({
     const machinesService = new MachinesService();
     const router = useRouter();
 
+    // ----------------------------------------------------------------
+    // Данные для выбора опций
     const sizesForSelectList = computed(() =>
       createSelectParametersArray(
         machinesService.sizeList || [useEmptyParameter(ParameterTypesEnum.size)],
       ));
+
     const drinksForSelectList = computed(() =>
       createSelectParametersArray(
         machinesService.drinkQtyList || [useEmptyParameter(ParameterTypesEnum.qty)],
       ));
 
+    // ----------------------------------------------------------------
+    // Выбранные опции
     const selectedSize = computed({
       get: () => machinesService.currentConfig?.size || useEmptyParameter(ParameterTypesEnum.size),
       set: newValue => (machinesService.updateCurrentConfiguration({ size: newValue as Required<ParameterDto> })),
@@ -76,18 +81,30 @@ export default defineComponent({
       set: newValue => (machinesService.updateCurrentConfiguration({ qty: newValue })),
     });
 
+    // ----------------------------------------------------------------
+    // Заголовок страницы
     const pageLabel = computed(() => `Кофемашина: ${selectedSize.value.name} размер, с выбором из ${selectedDrinkQty.value.name} напитков`);
 
     watch(pageLabel, () => machinesService.updateCurrentConfiguration({ name: pageLabel.value }));
 
+    // ----------------------------------------------------------------
+    // Изображение
+    const imageSrc = computed(() => selectedSize.value.image ? selectedSize.value.image : '../../public/placeholder.png');
+
+    // ----------------------------------------------------------------
+    // Обработка событий
     async function addMachine() {
       await machinesService.sendMachineToCort();
     }
 
+    // ----------------------------------------------------------------
+    // Роутинг
     function gotoCart() {
       router.push({ name: 'cart' });
     }
 
+    // ----------------------------------------------------------------
+    // Загрузка данных
     onBeforeMount(async () => {
       if (!machinesService.sizeList?.length || !machinesService.drinkQtyList?.length) {
         await machinesService.loadConfigLists();
@@ -101,6 +118,7 @@ export default defineComponent({
       drinksForSelectList,
 
       pageLabel,
+      imageSrc,
 
       addMachine,
       gotoCart,

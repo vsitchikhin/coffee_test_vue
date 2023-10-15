@@ -30,16 +30,20 @@ export default defineComponent({
     const machinesService = new MachinesService();
     const router = useRouter();
 
+    // ----------------------------------------------------------------
+    // Параметры отображения
     const machinesList = computed(() => machinesService.machineList);
 
     const showMachinesList = computed(() => !!machinesList.value && !!machinesList.value.length);
 
+    // ----------------------------------------------------------------
+    // Роутинг
     function gotoConf() {
       router.push({ name: 'config' });
     }
 
-
-
+    // ----------------------------------------------------------------
+    // Загрузка данных
     onBeforeMount(async () => {
       await machinesService.loadMachineList();
     });
