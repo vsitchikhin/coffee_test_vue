@@ -89,7 +89,9 @@ export default defineComponent({
     }
 
     onBeforeMount(async () => {
-      await machinesService.loadConfigLists();
+      if (!machinesService.sizeList?.length || !machinesService.drinkQtyList?.length) {
+        await machinesService.loadConfigLists();
+      }
     });
 
     return {
